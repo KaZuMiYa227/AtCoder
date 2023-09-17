@@ -1,0 +1,110 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  int H, W;
+  cin >> H >> W;
+  vector<vector<char>> vec_A(H, vector<char>(W));
+  for (int i = 0; i < H; i ++) {
+    for (int j = 0; j < W; j ++) {
+      cin >> vec_A.at(i).at(j);
+    }
+  }
+  
+  //行の.の個数をカウントする。
+  vector<vector<char>> vec_B;
+  for (int i = 0; i < H; i ++) {
+    int white_counter = 0;
+    for (int j = 0; j < W; j ++) {
+      if (vec_A.at(i).at(j) == '.') {
+        white_counter ++;
+      }
+    }
+    //白のみで構成されている行を排除し、そうでない行をvec_Bに追加する。
+    if (white_counter != W) {
+      vec_B.push_back(vec_A.at(i));
+    }
+  }
+  
+  int length_B = vec_B.size();
+  //削除する行がない場合
+  if (length_B == H) {
+    //白のみで構成されている列のインデックスを格納するvector
+    vector<int> vec_C;
+    for (int i = 0; i < W; i ++) {
+      int white_counter_2 = 0;
+      for (int j = 0; j < H; j ++) {
+        if (vec_B.at(j).at(i) == '.') {
+          white_counter_2 ++;
+        }
+      }
+      
+      //列の全てが白で構成されているわけではない場合はvec_Cにその列のインデックスを追加
+      if (white_counter_2 != H) {
+        vec_C.push_back(i);
+      }
+    }
+    
+    int ls = vec_C.size();
+    //削除する列がない場合
+    if (ls == W) {
+      for (int i = 0; i < H; i ++) {
+        for (int j = 0; j < W; j ++) {
+          cout << vec_B.at(i).at(j);
+        }
+        cout << endl;
+      }
+    }
+    
+    else if (ls != W) {
+      for (int i = 0; i < H; i ++) {
+        for (int j = 0; j < ls; j ++) {
+          int column = vec_C.at(j);
+          cout << vec_B.at(i).at(column);
+        }
+        cout << endl;
+      }
+    }
+  }
+  
+  //削除する行がある場合
+  else if (length_B != H) {
+    int l = vec_B.size();
+    //白のみで構成されている列のインデックスを格納するvector
+    vector<int> vec_C;
+    for (int i = 0; i < W; i ++) {
+      int white_counter_2 = 0;
+      for (int j = 0; j < l; j ++) {
+        if (vec_B.at(j).at(i) == '.') {
+          white_counter_2 ++;
+        }
+      }
+      //列の全てが白で構成されているわけではない場合はvec_Cにその列のインデックスを追加
+      if (white_counter_2 != l) {
+        vec_C.push_back(i);
+      }
+    }
+    
+    int ls = vec_C.size();
+    //削除する列がない場合
+    if (ls == W) {
+      for (int i = 0; i < l; i ++) {
+        for (int j = 0; j < W; j ++) {
+          cout << vec_B.at(i).at(j);
+        }
+        cout << endl;
+      }
+    }
+    
+    else if (ls != W) {
+      int ls = vec_C.size();
+      for (int i = 0; i < l; i ++) {
+        for (int j = 0; j < ls; j ++) {
+          int column = vec_C.at(j);
+          cout << vec_B.at(i).at(column);
+        }
+        cout << endl;
+      }
+    }
+  }
+}
