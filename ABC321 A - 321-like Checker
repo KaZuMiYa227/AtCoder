@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  string N;
+  cin >> N;
+  int l = N.size();
+  int s = 0;
+  int i = 0;
+  while (i < l - 1) {
+    int a = N.at(i);
+    int b = N.at(i + 1);
+    if (a > b) {
+      s ++;
+      i ++;
+    }
+    else {
+      cout << "No" << endl;
+      break;
+    }
+  }
+  
+  if (s == l - 1) {
+    cout << "Yes" << endl;
+  }
+  
+}
