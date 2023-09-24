@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  int N, X;
+  cin >> N >> X;
+  vector<int> vec_A(N - 1);
+  for (int i = 0; i < N - 1; i ++) {
+    cin >> vec_A.at(i);
+  }
+  sort(vec_A.begin(), vec_A.end());
+  int max = vec_A.at(N - 2);
+  int min = vec_A.at(0);
+  
+  int sum = 0;
+  for (int i = 1; i < N - 2; i ++) {
+    sum += vec_A.at(i);
+  }
+  
+  int A_N = X - sum;
+  if (min < A_N && A_N < max) {
+    cout << A_N << endl;
+  }
+  else if (A_N <= min && min + sum >= X) {
+    cout << 0 << endl;
+  }
+  else if (A_N >= max && max + sum >= X) {
+    cout << max << endl;
+  }
+  else {
+    cout << -1 << endl;
+  }
+}
