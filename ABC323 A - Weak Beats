@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  string S;
+  cin >> S;
+  int l = S.size();
+  int s = 0;
+  int i = 1;
+  int p = l/2;
+  while (i < l) {
+    if (S.at(i) != '0') {
+      cout << "No" << endl;
+      break;
+    }
+    else if (S.at(i) == '0') {
+      s ++;
+      i += 2;
+    }
+  }
+  if (s == p) {
+    cout << "Yes" << endl;
+  }
+}
