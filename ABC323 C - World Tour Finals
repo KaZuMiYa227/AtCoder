@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  int N, M;
+  cin >> N >> M;
+  vector<int> scores(M);
+  for (int i = 0; i < M; i ++) {
+    cin >> scores.at(i);
+  }
+  vector<int> personal_scores(N);
+  vector<string> problems(N);
+  for (int i = 0; i < N; i ++) {
+    string S;
+    cin >> S;
+    problems.at(i) = S;
+    int s = 0;
+    for (int j = 0; j < M; j ++) {
+      char a = S.at(j);
+      if (a == 'o') {
+        s += scores.at(j);
+      }
+    }
+    personal_scores.at(i) = s + i + 1;
+  }
+  int max_value = *max_element(personal_scores.begin(), personal_scores.end());
+  
+  for (int i = 0; i < N; i ++) {
+    vector<int> new_scores;
+    for (int j = 0; j < M; j ++) {
+      char a = problems.at(i).at(j);
+      if (a == 'x') {
+        new_scores.push_back(scores.at(j));
+      }
+    //解いていない問題のスコアを降順に並べる
+    sort(new_scores.begin(), new_scores.end(), greater<int>());
+    }
+    if (personal_scores.at(i) == max_value) {
+      cout << 0 << endl;
+    }
+    else {
+      int s = 0;
+      int l = new_scores.size();
+      for (int k = 0; k < l; k ++) {
+        personal_scores.at(i) += new_scores.at(k);
+        s ++;
+        if (personal_scores.at(i) > max_value) {
+          cout << s << endl;
+          break;
+        }
+      }
+    }
+  }
+}
